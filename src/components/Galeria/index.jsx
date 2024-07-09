@@ -1,33 +1,46 @@
-import Titulo from "../Titulo"
-import Tag from "./Tags"
-import Populares from "./Populares"
 import styled from "styled-components"
+import Titulo from "../Titulo"
+import Populares from "./Populares"
+import Tag from "./Tags"
+import Imagen from "./Imagen"
 
 const GaleriaContainer = styled.div`
-    display: flex;
-
+display: flex;
+gap: 24px;
 `
 
 const SeccionFluida = styled.section`
-    flex-grow:1;
+flex-grow: 1;
+`
+const ImagenesContainer = styled.section`
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
 `
 
 
-const Galeria = ({fotos = []}) => {
+const Galeria = ({ fotos = [], alSeleccionarFoto, alAlternarFavorito }) => {
+
     return (
         <>
             <Tag />
             <GaleriaContainer>
                 <SeccionFluida>
                     <Titulo>Navegue por la galería</Titulo>
-                    {fotos.map(foto=>{
-                        return <p key={foto.id}>{foto.path}</p>
-                    })}
+                    <ImagenesContainer>
+                        {fotos.map(foto => <Imagen
+                        alAlternarFavorito={alAlternarFavorito}
+                        alSolicitarZoom={alSeleccionarFoto}
+                            key={foto.id}
+                            foto={foto} />)
+                        }
+                    </ImagenesContainer>
                 </SeccionFluida>
-                <Populares/>
+                <Populares />
+
             </GaleriaContainer>
         </>
-
     )
 }
 
