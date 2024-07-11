@@ -1,20 +1,19 @@
-import styled from "styled-components";
-import tags from "./tags.json"
-
+import { styled } from 'styled-components';
+import tags from './tags.json'
 
 const TagsContainer = styled.section`
-    display:flex;
+    display: flex;
     align-items: center;
     gap: 64px;
     margin-top: 56px;
 `
-
 
 const TagTitulo = styled.h3`
     color: #D9D9D9;
     font-size: 24px;
     margin: 0;
 `;
+
 const Tag = styled.button`
     font-size: 24px;
     color: #FFFFFF;
@@ -38,12 +37,10 @@ const Div = styled.div`
 
 const Tags = () => {
     return <TagsContainer>
-        <TagTitulo>Buscar por tags:</TagTitulo>
-
+        <TagTitulo>Busque por tags:</TagTitulo>
         <Div>
             {tags.map(tag => <Tag key={tag.id}>{tag.titulo}</Tag>)}
         </Div>
-
     </TagsContainer>
 }
 

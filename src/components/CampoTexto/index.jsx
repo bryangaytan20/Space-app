@@ -1,10 +1,15 @@
+import { useContext, useRef } from "react";
 import { styled } from "styled-components"
 import search from './search.png'
-import { useRef } from "react";
+import { GlobalContext } from "../../context/GlobalContext";
+
+
 const ContainerEstilizado = styled.div`
     position: relative;
     display: inline-block;
 `;
+
+
 const CampoTextoEstilizado = styled.input`
     height: 56px;
     padding: 12px 16px;
@@ -18,7 +23,9 @@ const CampoTextoEstilizado = styled.input`
     font-weight: 400;
     font-size: 20px;
     line-height: 20px;
+    outline: none;
 `
+
 const IconoLupa = styled.img`
     position: absolute;
     top: 10px;
@@ -26,16 +33,19 @@ const IconoLupa = styled.img`
     width: 38px !important;
     height: 38px;
 `;
-const CampoTexto = ({setConsulta}) => {
-    const cajaConsulta = useRef(null)
+
+const CampoTexto = () => {
+    const cajaConsulta = useRef(null);
+    const { dispatch } = useContext(GlobalContext);
+
     return (
         <ContainerEstilizado>
-            <CampoTextoEstilizado ref={cajaConsulta} placeholder="Busca una foto" />
-            <IconoLupa src={search} alt="ícono de lupa" onClick={()=> {
-                setConsulta(cajaConsulta.current.value)
-            } }/>
+            <CampoTextoEstilizado ref={cajaConsulta} type="text" placeholder="¿Qué estás buscando?" />
+            <IconoLupa src={search} alt="ícono de lupa" onClick={() => {
+                dispatch({ type: 'SET_CONSULTA', payload: cajaConsulta.current.value })
+            }} />
         </ContainerEstilizado>
     )
 }
-export default CampoTexto
 
+export default CampoTexto;
